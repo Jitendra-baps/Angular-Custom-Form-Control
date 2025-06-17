@@ -1,0 +1,97 @@
+<!-- <form [formGroup]="testForm">
+  <app-custom-form-control formControlName="firstName"></app-custom-form-control>
+  <app-custom-form-control formControlName="lastName"></app-custom-form-control>
+  <app-custom-form-control formControlName="email"></app-custom-form-control>
+
+  
+</form> -->
+
+<div class="form-container">
+  <form [formGroup]="testForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+      <label for="firstName" class="required">First Name</label>
+      <input type="text" id="firstName" formControlName="firstName" />
+      <div *ngIf="testForm.get('firstName')?.invalid && testForm.get('firstName')?.touched" class="error">
+        First name is required (min 2 characters).
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="lastName" class="required">Last Name</label>
+      <input type="text" id="lastName" formControlName="lastName" />
+      <div *ngIf="
+          testForm.get('lastName')?.invalid && testForm.get('lastName')?.touched
+        " class="error">
+        Last name is required (min 2 characters).
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email" class="required">Email</label>
+      <input type="email" id="email" formControlName="email" />
+      <div *ngIf="testForm.get('email')?.invalid && testForm.get('email')?.touched" class="error">
+        Enter a valid email.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="password" class="required">Password</label>
+      <input type="password" id="password" formControlName="password" />
+      <div *ngIf="
+          testForm.get('password')?.invalid && testForm.get('password')?.touched
+        " class="error">
+        Password must be at least 6 characters.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="hobby">Hobby</label>
+      <input type="text" id="hobby" formControlName="hobby" />
+    </div>
+
+    <button type="submit" [disabled]="!testForm.valid" [ngClass]="{ disabled: !testForm.valid }">
+      Submit
+    </button>
+  </form>
+</div>
+
+
+<div class="form-container">
+  <form [formGroup]="testForm" (ngSubmit)="onSubmit()">
+
+    <input-field formControlName="firstName" [fieldLabel]="'First Name'" [fieldName]="'firstName'"
+      [parentFormGroup]="testForm" [isRequired]="true"></input-field>
+
+    <input-field formControlName="lastName" [fieldLabel]="'Last Name'" [fieldName]="'lastName'"
+      [parentFormGroup]="testForm" [isRequired]="true"></input-field>
+
+    <input-field formControlName="email" [fieldLabel]="'Email'" [fieldName]="'email'" [parentFormGroup]="testForm"
+      [isRequired]="true"></input-field>
+
+    <input-field formControlName="password" [fieldLabel]="'Password'" [fieldName]="'password'"
+      [parentFormGroup]="testForm" [isRequired]="true"></input-field>
+
+    <input-field formControlName="hobby" [fieldLabel]="'Hobby'" [fieldName]="'hobby'" [parentFormGroup]="testForm"
+      [isRequired]="false"></input-field>
+
+    <button type="submit" [disabled]="!testForm.valid" [ngClass]="{ disabled: !testForm.valid }">
+      Submit
+    </button>
+  </form>
+</div>
+
+
+<div class="form-container">
+  <form [formGroup]="testForm" (ngSubmit)="onSubmit()">
+
+    @for (formField of formArray(); track formField.fieldName) {
+    <input-field [formControlName]="formField.fieldName" [fieldLabel]="formField.fieldLabel"
+      [fieldName]="formField.fieldName" [parentFormGroup]="testForm" [isRequired]="formField.isRequired"></input-field>
+    }
+
+    <button type="submit" [disabled]="!testForm.valid" [ngClass]="{ disabled: !testForm.valid }">
+      Submit
+    </button>
+  </form>
+</div>

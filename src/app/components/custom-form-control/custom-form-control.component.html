@@ -1,0 +1,12 @@
+<!-- <input type="text" id="firstName" [value]="value()" [disabled]="isDisabled()" /> -->
+
+<div class="form-group">
+  <label [for]="fieldLabel()" [ngClass]="{ required: isRequired() }">{{ fieldLabel() }}</label>
+  <input type="text" (blur)="touched()" (input)="onChange($event)" [id]="fieldName()" [value]="value()"
+    [disabled]="isDisabled()" formControlName="firstName" />
+
+  @if (parentFormGroup()?.get(fieldName())?.invalid &&
+  parentFormGroup()?.get(fieldName())?.touched) {
+  <div class="error"> {{ fieldLabel() + " is required (min 2 characters)." }} </div>
+  }
+</div>
